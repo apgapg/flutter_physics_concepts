@@ -65,6 +65,7 @@ class _HomePageState extends State<HomePage>
       _wave1a
         ..phase = pi
         ..color = Colors.blue
+      ..forward=true
     ],
     title: "Out of phase waves",
     description: "Same two waves just one of them is 180° out of phase",

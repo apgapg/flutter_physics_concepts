@@ -8,7 +8,7 @@ class Wave {
   Color color;
   final String title;
   final String description;
-  final bool forward;
+  bool forward;
 
   Wave({
     this.title,
