@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 2,
         title: Text("Wave Motion for IIT-JEE by Ayush P Gupta"),
         actions: <Widget>[
           Container(
@@ -110,86 +111,83 @@ class _HomePageState extends State<HomePage>
         ],
       ),
       body: Container(
-        child: SingleChildScrollView(
+        child: ListView(
           padding: EdgeInsets.symmetric(
             vertical: 4,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                child: AnimatedBuilder(
-                  animation: _controller,
-                  builder: (context, _) => Text(
-                    "A=Amplitude λ=Wavelength f=Frequency Φ=Phase\n"
-                    "y=Asin(kx-wt+Φ)\n"
-                    "k=2π/λ  w=2πf",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                      height: 1.5,
-                    ),
-                    textAlign: TextAlign.center,
-                    softWrap: true,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              child: AnimatedBuilder(
+                animation: _controller,
+                builder: (context, _) => Text(
+                  "A=Amplitude λ=Wavelength f=Frequency Φ=Phase\n"
+                  "y=Asin(kx-wt+Φ)\n"
+                  "k=2π/λ  w=2πf",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black54,
+                    height: 1.5,
                   ),
+                  textAlign: TextAlign.center,
+                  softWrap: true,
                 ),
               ),
-              for (final wave in list)
-                AnimatedBuilder(
-                  animation: _controller,
-                  builder: (context, _) => WaveMotion(wave, _controller.value),
-                ),
+            ),
+            for (final wave in list)
               AnimatedBuilder(
                 animation: _controller,
-                builder: (context, _) => OverlappingWaveMotion(
-                  overlap2,
-                  _controller.value,
-                ),
+                builder: (context, _) => WaveMotion(wave, _controller.value),
               ),
-              AnimatedBuilder(
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (context, _) => OverlappingWaveMotion(
+                overlap2,
+                _controller.value,
+              ),
+            ),
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (context, _) => OverlappingWaveMotion(
+                overlap1,
+                _controller.value,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              child: AnimatedBuilder(
                 animation: _controller,
-                builder: (context, _) => OverlappingWaveMotion(
-                  overlap1,
-                  _controller.value,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                child: AnimatedBuilder(
-                  animation: _controller,
-                  builder: (context, _) => Column(
-                    children: <Widget>[
-                      Text(
-                        "To learn more visit me at Unacademy below",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black54,
-                          height: 1.5,
-                        ),
-                        textAlign: TextAlign.center,
-                        softWrap: true,
+                builder: (context, _) => Column(
+                  children: <Widget>[
+                    Text(
+                      "To learn more visit me at Unacademy below",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black54,
+                        height: 1.5,
                       ),
-                      InkWell(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal:4.0),
-                            child: Text(
-                              "https://unacademy.com/@ayushpgupta",
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: Colors.blue,
-                              ),
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                    ),
+                    InkWell(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: Text(
+                            "https://unacademy.com/@ayushpgupta",
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue,
                             ),
                           ),
-                          onTap: () {
-                            //js.context.callMethod("open", ["https://unacademy.com/@ayushpgupta"]);
-                          })
-                    ],
-                  ),
+                        ),
+                        onTap: () {
+                          //js.context.callMethod("open", ["https://unacademy.com/@ayushpgupta"]);
+                        })
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
