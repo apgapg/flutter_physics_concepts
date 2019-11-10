@@ -25,6 +25,15 @@ class MyApp extends StatelessWidget {
       title: 'Physics Concepts',
       theme: ThemeData(
         primarySwatch: Colors.purple,
+        appBarTheme: AppBarTheme(
+          textTheme: TextTheme(
+            title: TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: HomePage(),
