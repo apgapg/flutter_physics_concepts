@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage>
       _wave1a
         ..phase = pi
         ..color = Colors.blue
-      ..forward=true
+        ..forward = true
     ],
     title: "Out of phase waves",
     description: "Same two waves just one of them is 180° out of phase",
@@ -77,10 +77,11 @@ class _HomePageState extends State<HomePage>
     super.initState();
     _controller = AnimationController(
       lowerBound: 0,
-      upperBound: 20,
-      duration: const Duration(seconds: 20),
+      upperBound: 200,
+      duration: const Duration(seconds: 200),
       vsync: this,
-    )..repeat();
+    );
+    _controller.repeat();
   }
 
   @override
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 2,
+        elevation: 0,
         title: Text("Wave Motion for IIT-JEE by Ayush P Gupta"),
         actions: <Widget>[
           Container(
@@ -112,56 +113,21 @@ class _HomePageState extends State<HomePage>
         ],
       ),
       body: Container(
-        child: ListView(
-          padding: EdgeInsets.symmetric(
-            vertical: 4,
-          ),
+        child: Stack(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              child: AnimatedBuilder(
-                animation: _controller,
-                builder: (context, _) => Text(
-                  "A=Amplitude λ=Wavelength f=Frequency Φ=Phase\n"
-                  "y=Asin(kx-wt+Φ)\n"
-                  "k=2π/λ  w=2πf",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black54,
-                    height: 1.5,
-                  ),
-                  textAlign: TextAlign.center,
-                  softWrap: true,
-                ),
+            ListView(
+              padding: EdgeInsets.symmetric(
+                vertical: 4,
               ),
-            ),
-            for (final wave in list)
-              AnimatedBuilder(
-                animation: _controller,
-                builder: (context, _) => WaveMotion(wave, _controller.value),
-              ),
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (context, _) => OverlappingWaveMotion(
-                overlap2,
-                _controller.value,
-              ),
-            ),
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (context, _) => OverlappingWaveMotion(
-                overlap1,
-                _controller.value,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              child: AnimatedBuilder(
-                animation: _controller,
-                builder: (context, _) => Column(
-                  children: <Widget>[
-                    Text(
-                      "To learn more visit me at Unacademy below",
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  child: AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, _) => Text(
+                      "A=Amplitude λ=Wavelength f=Frequency Φ=Phase\n"
+                      "y=Asin(kx-wt+Φ)\n"
+                      "k=2π/λ  w=2πf",
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.black54,
@@ -170,24 +136,96 @@ class _HomePageState extends State<HomePage>
                       textAlign: TextAlign.center,
                       softWrap: true,
                     ),
-                    InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          child: Text(
-                            "https://unacademy.com/@ayushpgupta",
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.blue,
-                            ),
+                  ),
+                ),
+                for (final wave in list)
+                  AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, _) =>
+                        WaveMotion(wave, _controller.value),
+                  ),
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, _) => OverlappingWaveMotion(
+                    overlap2,
+                    _controller.value,
+                  ),
+                ),
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, _) => OverlappingWaveMotion(
+                    overlap1,
+                    _controller.value,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  child: AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, _) => Column(
+                      children: <Widget>[
+                        Text(
+                          "To learn more visit me at Unacademy below",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                            height: 1.5,
                           ),
+                          textAlign: TextAlign.center,
+                          softWrap: true,
                         ),
-                        onTap: () {
-                          //js.context.callMethod("open", ["https://unacademy.com/@ayushpgupta"]);
-                        })
+                        InkWell(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Text(
+                                "https://unacademy.com/@ayushpgupta",
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              //js.context.callMethod("open", ["https://unacademy.com/@ayushpgupta"]);
+                            })
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              right: 12,
+              top: 4,
+              child: RaisedButton(
+                elevation: 1,
+                focusElevation: 1,
+                highlightElevation: 1,
+                hoverElevation: 1,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Icon(
+                      _controller.isAnimating ? Icons.pause : Icons.play_arrow,
+                      size: 20,
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text(_controller.isAnimating ? "PAUSE" : "PLAY")
                   ],
                 ),
+                onPressed: () {
+                  setState(() {
+                    if (_controller.isAnimating)
+                      _controller.stop();
+                    else
+                      _controller.repeat();
+                  });
+                },
               ),
-            ),
+            )
           ],
         ),
       ),
