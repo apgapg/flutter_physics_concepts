@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_concepts/common/overlapping_wave_motion.dart';
+import 'package:flutter_concepts/common/super_impose_wave_motion.dart';
 import 'package:flutter_concepts/common/wave_motion.dart';
 import 'package:flutter_concepts/model/overlapping_waves.dart';
+import 'package:flutter_concepts/model/super_impose_waves.dart';
 import 'package:flutter_concepts/model/wave.dart';
 
 class HomePage extends StatefulWidget {
@@ -69,6 +71,25 @@ class _HomePageState extends State<HomePage>
     ],
     title: "Out of phase waves",
     description: "Same two waves just one of them is 180° out of phase",
+  );
+
+  final superImpose1 = SuperImposeWaves(
+    list: [
+      _wave1.copyWith(color: Colors.grey[500], phase: 0, width: 2),
+      _wave1a.copyWith(
+          amplitude: 80, color: Colors.black54, phase: 0, width: 2),
+    ],
+    title: "Superimposition of waves",
+    description: "Showing the superimposition of two identical waves with different amplitudes",
+  );
+
+  final superImpose2 = SuperImposeWaves(
+    list: [
+      _wave1.copyWith(color: Colors.grey[500], width: 2),
+      _wave1a.copyWith(color: Colors.black54, forward: false, width: 2),
+    ],
+    title: "Stationary waves",
+    description: "Two identical waves travelling in opposite direction give rise to stationary waves. Note these wave do not propogate. See the nodes and antinodes.",
   );
   AnimationController _controller;
 
@@ -155,6 +176,20 @@ class _HomePageState extends State<HomePage>
                   animation: _controller,
                   builder: (context, _) => OverlappingWaveMotion(
                     overlap1,
+                    _controller.value,
+                  ),
+                ),
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, _) => SuperImposeWaveMotion(
+                    superImpose1,
+                    _controller.value,
+                  ),
+                ),
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, _) => SuperImposeWaveMotion(
+                    superImpose2,
                     _controller.value,
                   ),
                 ),

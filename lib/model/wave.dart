@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class Wave {
-  final double amplitude;
+  double amplitude;
   final double wavelength;
   final double frequency;
   double phase;
@@ -9,6 +9,7 @@ class Wave {
   final String title;
   final String description;
   bool forward;
+  double width;
 
   Wave({
     this.title,
@@ -19,11 +20,32 @@ class Wave {
     this.phase,
     this.color,
     this.forward = true,
+    this.width = 4,
   });
 
   @override
   String toString() {
     // TODO: implement toString
     return "Wave: A:$amplitude, λ:$wavelength, f:$frequency, Φ:$phase";
+  }
+
+  Wave copyWith({
+    double amplitude,
+    double phase,
+    Color color,
+    bool forward,
+    double width,
+  }) {
+    return Wave(
+      title: title,
+      description: description,
+      wavelength: wavelength,
+      frequency: frequency,
+      color: color ?? this.color,
+      forward: forward ?? this.forward,
+      amplitude: amplitude ?? this.amplitude,
+      phase: phase ?? this.phase,
+      width: width ?? this.width,
+    );
   }
 }
