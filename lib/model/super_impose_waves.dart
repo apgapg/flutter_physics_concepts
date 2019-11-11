@@ -5,5 +5,9 @@ class SuperImposeWaves {
   final String title;
   final String description;
 
-  SuperImposeWaves({this.title, this.description, this.list});
+  SuperImposeWaves({
+    this.title,
+    this.description,
+    this.list,
+  });
 }
