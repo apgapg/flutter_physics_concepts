@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_concepts/common/wave_equation.dart';
-import 'package:flutter_concepts/common/wave_painter.dart';
-import 'package:flutter_concepts/common/wave_title.dart';
-import 'package:flutter_concepts/model/overlapping_waves.dart';
+import 'package:flutter_concepts/wave/common/super_impose_wave_painter.dart';
+import 'package:flutter_concepts/wave/common/wave_equation.dart';
+import 'package:flutter_concepts/wave/common/wave_painter.dart';
+import 'package:flutter_concepts/wave/common/wave_title.dart';
+import 'package:flutter_concepts/wave/model/super_impose_waves.dart';
 
-class OverlappingWaveMotion extends StatefulWidget {
-  final OverlappingWaves model;
+class SuperImposeWaveMotion extends StatefulWidget {
+  final SuperImposeWaves model;
   final double time;
 
-  OverlappingWaveMotion(
+  SuperImposeWaveMotion(
     this.model,
     this.time,
   );
 
   @override
-  _OverlappingWaveMotionState createState() => _OverlappingWaveMotionState();
+  _SuperImposeWaveMotionState createState() => _SuperImposeWaveMotionState();
 }
 
-class _OverlappingWaveMotionState extends State<OverlappingWaveMotion>
+class _SuperImposeWaveMotionState extends State<SuperImposeWaveMotion>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
@@ -59,13 +60,13 @@ class _OverlappingWaveMotionState extends State<OverlappingWaveMotion>
           Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              for (final wave in widget.model.list.reversed)
-                CustomPaint(
-                  painter: WavePainter(wave, widget.time),
-                  child: Container(
-                    height: (wave.amplitude * 2) + 64,
-                  ),
+              CustomPaint(
+                painter: SuperImposeWavePainter(
+                    widget.model.list, widget.time, Colors.green),
+                child: Container(
+                  height: (widget.model.list[0].amplitude * 5) + 64,
                 ),
+              ),
             ],
           ),
           Column(

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_concepts/pages/home_page.dart';
+import 'package:flutter_concepts/optics/optics_page.dart';
 
 // Sets a platform override for desktop to avoid exceptions. See
 // https://flutter.dev/desktop#target-platform-override for more info.
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: OpticsPage(),
     );
   }
 }

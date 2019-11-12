@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_concepts/common/super_impose_wave_painter.dart';
-import 'package:flutter_concepts/common/wave_equation.dart';
-import 'package:flutter_concepts/common/wave_painter.dart';
-import 'package:flutter_concepts/common/wave_title.dart';
-import 'package:flutter_concepts/model/super_impose_waves.dart';
+import 'package:flutter_concepts/wave/common/wave_equation.dart';
+import 'package:flutter_concepts/wave/common/wave_painter.dart';
+import 'package:flutter_concepts/wave/common/wave_title.dart';
+import 'package:flutter_concepts/wave/model/overlapping_waves.dart';
 
-class SuperImposeWaveMotion extends StatefulWidget {
-  final SuperImposeWaves model;
+class OverlappingWaveMotion extends StatefulWidget {
+  final OverlappingWaves model;
   final double time;
 
-  SuperImposeWaveMotion(
+  OverlappingWaveMotion(
     this.model,
     this.time,
   );
 
   @override
-  _SuperImposeWaveMotionState createState() => _SuperImposeWaveMotionState();
+  _OverlappingWaveMotionState createState() => _OverlappingWaveMotionState();
 }
 
-class _SuperImposeWaveMotionState extends State<SuperImposeWaveMotion>
+class _OverlappingWaveMotionState extends State<OverlappingWaveMotion>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
@@ -60,13 +59,13 @@ class _SuperImposeWaveMotionState extends State<SuperImposeWaveMotion>
           Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              CustomPaint(
-                painter: SuperImposeWavePainter(
-                    widget.model.list, widget.time, Colors.green),
-                child: Container(
-                  height: (widget.model.list[0].amplitude * 5) + 64,
+              for (final wave in widget.model.list.reversed)
+                CustomPaint(
+                  painter: WavePainter(wave, widget.time),
+                  child: Container(
+                    height: (wave.amplitude * 2) + 64,
+                  ),
                 ),
-              ),
             ],
           ),
           Column(

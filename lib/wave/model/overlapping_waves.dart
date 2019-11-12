@@ -1,4 +1,4 @@
-import 'package:flutter_concepts/model/wave.dart';
+import 'package:flutter_concepts/wave/model/wave.dart';
 
 class OverlappingWaves {
   final List<Wave> list;

@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_concepts/model/wave.dart';
+import 'package:flutter_concepts/wave/model/wave.dart';
 
 class WaveTitle extends StatelessWidget {
   final Wave wave;

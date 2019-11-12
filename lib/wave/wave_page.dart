@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_concepts/common/overlapping_wave_motion.dart';
-import 'package:flutter_concepts/common/super_impose_wave_motion.dart';
-import 'package:flutter_concepts/common/wave_motion.dart';
-import 'package:flutter_concepts/model/overlapping_waves.dart';
-import 'package:flutter_concepts/model/super_impose_waves.dart';
-import 'package:flutter_concepts/model/wave.dart';
+import 'package:flutter_concepts/wave/common/overlapping_wave_motion.dart';
+import 'package:flutter_concepts/wave/common/super_impose_wave_motion.dart';
+import 'package:flutter_concepts/wave/common/wave_motion.dart';
+import 'package:flutter_concepts/wave/model/overlapping_waves.dart';
+import 'package:flutter_concepts/wave/model/super_impose_waves.dart';
+import 'package:flutter_concepts/wave/model/wave.dart';
 
 class HomePage extends StatefulWidget {
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_concepts/common/wave_equation.dart';
-import 'package:flutter_concepts/common/wave_painter.dart';
-import 'package:flutter_concepts/common/wave_title.dart';
-import 'package:flutter_concepts/model/wave.dart';
+import 'package:flutter_concepts/wave/common/wave_equation.dart';
+import 'package:flutter_concepts/wave/common/wave_painter.dart';
+import 'package:flutter_concepts/wave/common/wave_title.dart';
+import 'package:flutter_concepts/wave/model/wave.dart';
 
 class WaveMotion extends StatefulWidget {
   final Wave wave;
