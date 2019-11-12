@@ -4,3 +4,5 @@ A Flutter project for physics concepts.
 [https://physics-concepts.firebaseapp.com/](https://physics-concepts.firebaseapp.com/)
 
 <img src="https://raw.githubusercontent.com/apgapg/flutter_physics_concepts/master/src/s.png"  height = "400" alt="Physics Concepts">
+<img src="https://raw.githubusercontent.com/apgapg/flutter_physics_concepts/master/src/s2.gif"  height = "400" alt="Physics Concepts">
+<img src="https://raw.githubusercontent.com/apgapg/flutter_physics_concepts/master/src/s3.gif"  height = "400" alt="Physics Concepts">
