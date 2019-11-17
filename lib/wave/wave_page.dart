@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_concepts/common/about_widget.dart';
 import 'package:flutter_concepts/wave/common/overlapping_wave_motion.dart';
 import 'package:flutter_concepts/wave/common/super_impose_wave_motion.dart';
 import 'package:flutter_concepts/wave/common/wave_motion.dart';
@@ -8,12 +9,12 @@ import 'package:flutter_concepts/wave/model/overlapping_waves.dart';
 import 'package:flutter_concepts/wave/model/super_impose_waves.dart';
 import 'package:flutter_concepts/wave/model/wave.dart';
 
-class HomePage extends StatefulWidget {
+class WavePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _WavePageState createState() => _WavePageState();
 }
 
-class _HomePageState extends State<HomePage>
+class _WavePageState extends State<WavePage>
     with SingleTickerProviderStateMixin {
   static final _wave1 = Wave(
     title: "Sinusoidal Wave travelling in forward direction with 0° phase",
@@ -80,7 +81,8 @@ class _HomePageState extends State<HomePage>
           amplitude: 80, color: Colors.black54, phase: 0, width: 2),
     ],
     title: "Superimposition of waves",
-    description: "Showing the superimposition of two identical waves with different amplitudes",
+    description:
+        "Showing the superimposition of two identical waves with different amplitudes",
   );
 
   final superImpose2 = SuperImposeWaves(
@@ -89,7 +91,17 @@ class _HomePageState extends State<HomePage>
       _wave1a.copyWith(color: Colors.black54, forward: false, width: 2),
     ],
     title: "Stationary waves",
-    description: "Two identical waves travelling in opposite direction give rise to stationary waves. Note these wave do not propogate. See the nodes and antinodes.",
+    description:
+        "Two identical waves travelling in opposite direction give rise to stationary waves. Note these wave do not propogate. See the nodes and antinodes.",
+  );
+  final superImpose3 = SuperImposeWaves(
+    list: [
+      _wave1.copyWith(color: Colors.grey[500], width: 2,frequency: 1000,wavelength: 108),
+      _wave1.copyWith(color: Colors.black54, width: 2, frequency: 1080,wavelength: 100),
+    ],
+    title: "Beat Frequency in Sound Waves",
+    description:
+        "Two sound waves travelling in same direction, same amplitudes but different frequencies give rise to phenomenon known as Beats.",
   );
   AnimationController _controller;
 
@@ -115,7 +127,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        elevation: 1,
         title: Text("Wave Motion for IIT-JEE by Ayush P Gupta"),
         actions: <Widget>[
           Container(
@@ -193,41 +205,14 @@ class _HomePageState extends State<HomePage>
                     _controller.value,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  child: AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, _) => Column(
-                      children: <Widget>[
-                        Text(
-                          "To learn more visit me at Unacademy below",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                          softWrap: true,
-                        ),
-                        InkWell(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: Text(
-                                "https://unacademy.com/@ayushpgupta",
-                                style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              //js.context.callMethod("open", ["https://unacademy.com/@ayushpgupta"]);
-                            })
-                      ],
-                    ),
+                AnimatedBuilder(
+                  animation: _controller,
+                  builder: (context, _) => SuperImposeWaveMotion(
+                    superImpose3,
+                    _controller.value,
                   ),
                 ),
+                AboutWidget(),
               ],
             ),
             Positioned(

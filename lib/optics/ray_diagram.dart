@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_concepts/optics/ray_diagram_painter.dart';
 
 class RayDiagram extends StatefulWidget {
+  final String title;
+  final double u;
+  final double v;
+  final double f;
+
+  RayDiagram(
+    this.title, {
+    this.u,
+    this.v,
+    this.f,
+  });
+
   @override
   _RayDiagramState createState() => _RayDiagramState();
 }
@@ -15,6 +27,9 @@ class _RayDiagramState extends State<RayDiagram>
   @override
   void initState() {
     super.initState();
+    u = widget.u ?? u;
+    v = widget.v ?? v;
+    f = widget.f ?? f;
     v = (u * f) / (u + f);
   }
 
@@ -28,6 +43,16 @@ class _RayDiagramState extends State<RayDiagram>
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          Container(
+            child: Text(
+              widget.title,
+              style: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+                height: 1.4,
+              ),
+            ),
+          ),
           Container(
             child: Text(
               "u = ${u.toStringAsFixed(1)}     v = ${v.toStringAsFixed(1)}\n"

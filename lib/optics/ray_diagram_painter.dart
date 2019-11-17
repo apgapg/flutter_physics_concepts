@@ -123,7 +123,7 @@ class RayDiagramPainter extends CustomPainter {
     xAxisPath.reset();
     xAxisPath.moveTo(0, y0);
     xAxisPath.lineTo(width, y0);
-    canvas.drawArc(
+/*    canvas.drawArc(
       Rect.fromCircle(center: Offset(x0 + (2 * f), y0), radius: (2 * f) + 32),
       pi / 1.22,
       pi / 2.78,
@@ -136,7 +136,7 @@ class RayDiagramPainter extends CustomPainter {
       (pi / 2.78),
       false,
       _axisPaint,
-    );
+    );*/
     canvas.drawPath(xAxisPath, _axisPaint);
 
     xAxisPath.addOval(Rect.fromCircle(center: Offset(x0 - (f), y0), radius: 2));

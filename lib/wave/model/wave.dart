@@ -35,12 +35,14 @@ class Wave {
     Color color,
     bool forward,
     double width,
+    double frequency,
+    double wavelength,
   }) {
     return Wave(
       title: title,
       description: description,
-      wavelength: wavelength,
-      frequency: frequency,
+      wavelength: wavelength ?? this.wavelength,
+      frequency: frequency ?? this.frequency,
       color: color ?? this.color,
       forward: forward ?? this.forward,
       amplitude: amplitude ?? this.amplitude,

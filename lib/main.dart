@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_concepts/home/home_page.dart';
 import 'package:flutter_concepts/optics/optics_page.dart';
 
 // Sets a platform override for desktop to avoid exceptions. See
@@ -24,19 +25,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Physics Concepts',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        appBarTheme: AppBarTheme(
-          textTheme: TextTheme(
-            title: TextStyle(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-        ),
+        primarySwatch: Colors.indigo,
       ),
       debugShowCheckedModeBanner: false,
-      home: OpticsPage(),
+      home: HomePage(),
     );
   }
 }

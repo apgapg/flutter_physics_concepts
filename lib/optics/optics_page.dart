@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_concepts/common/about_widget.dart';
 import 'package:flutter_concepts/optics/ray_diagram.dart';
 
 class OpticsPage extends StatefulWidget {
@@ -32,11 +33,9 @@ class _OpticsPageState extends State<OpticsPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        elevation: 1,
         title: Text("Optics: Convex Lens Ray Diagram"),
-        actions: <Widget>[
-
-        ],
+        actions: <Widget>[],
       ),
       body: Container(
         child: Stack(
@@ -63,43 +62,12 @@ class _OpticsPageState extends State<OpticsPage>
                     ),
                   ),
                 ),
-                RayDiagram(),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  child: AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, _) => Column(
-                      children: <Widget>[
-                        Text(
-                          "To learn more visit me at Unacademy below",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                          softWrap: true,
-                        ),
-                        InkWell(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
-                            child: Text(
-                              "https://unacademy.com/@ayushpgupta",
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: Colors.blue,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            //js.context.callMethod("open", ["https://unacademy.com/@ayushpgupta"]);
-                          },
-                        )
-                      ],
-                    ),
-                  ),
+                RayDiagram("Object Ray Diagram of Simple Convex Lens"),
+                RayDiagram(
+                  "Object Ray Diagram of Simple Concave Lens",
+                  f: -100,
                 ),
+                AboutWidget(),
               ],
             ),
           ],
