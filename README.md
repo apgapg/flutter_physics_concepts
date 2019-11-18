@@ -2,7 +2,7 @@
 
 A Flutter project for physics concepts.
 
-###About
+### About
 Learn Physics Concept in more visual ways. Wave Theory, Ray Optics are difficult to understand in plain theory. Hence learn all of them in more animating visual ways.
 
 Website: [https://physics-concepts.firebaseapp.com/](https://physics-concepts.firebaseapp.com/)
