@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_concepts/error/error_page.dart';
+import 'package:flutter_concepts/graph/graph_plotter_page.dart';
 import 'package:flutter_concepts/home/module_card.dart';
 import 'package:flutter_concepts/optics/optics_page.dart';
 import 'package:flutter_concepts/wave/wave_page.dart';
@@ -45,6 +46,11 @@ class _HomePageState extends State<HomePage> {
                   "Error Analysis",
                   "Study the concepts of errors, their impact, comparisons etc",
                   onErrorTap,
+                ),
+                ModuleCard(
+                  "Graph Plotter",
+                  "Plot the polynomials to understand graphs visually",
+                  onPlotterTap,
                 )
               ],
             ),
@@ -77,6 +83,15 @@ class _HomePageState extends State<HomePage> {
       context,
       PageRouteBuilder(
         pageBuilder: (context, a1, a2) => ErrorPage(),
+      ),
+    );
+  }
+
+  void onPlotterTap() {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, a1, a2) => GraphPlotterPage(),
       ),
     );
   }
