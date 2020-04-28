@@ -12,7 +12,7 @@ class GraphPlotterPage extends StatefulWidget {
 }
 
 class _GraphPlotterPageState extends State<GraphPlotterPage> {
-  double scaleFactor = 20;
+  double scaleFactor = 35;
   final graphs = <Graph>[];
 
   @override
