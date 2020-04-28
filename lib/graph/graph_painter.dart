@@ -19,7 +19,8 @@ class GraphPainter extends CustomPainter {
   GraphPainter(this.scaleFactor, this.graph) {
     try {
       exp = p.parse("${graph.function}");
-      _showGraph = true;
+      _showGraph = graph.isVisible;
+      _graphPaint.color = graph.color;
     } catch (e) {
       print(e);
       _showGraph = false;
@@ -40,22 +41,22 @@ class GraphPainter extends CustomPainter {
     final x0 = size.width / 2;
     final y0 = size.height / 2;
 
-    final graphPath = Path();
-    final graphPath2 = Path();
-    graphPath.moveTo(x0, y0);
-    graphPath2.moveTo(x0, y0);
-    final graphPath3 = Path();
-    final graphPath4 = Path();
-    graphPath3.moveTo(x0, y0);
-    graphPath4.moveTo(x0, y0);
+    final graphPathPositive = Path();
+    final graphPathNegative = Path();
+
+    final y = _getY(0);
+
+    graphPathPositive.moveTo(x0, getY(y, y0));
+    graphPathNegative.moveTo(x0, getY(y, y0));
+    print(getY(_getY(x0), y0));
     for (double x = 0; x < x0; x += 0.1) {
       final y = _getY(x);
-      graphPath.lineTo(getX(x, x0), getY(y, y0));
+      graphPathPositive.lineTo(getX(x, x0), getY(y, y0));
       final y2 = _getY(-x);
-      graphPath2.lineTo(getX(-x, x0), getY(y2, y0));
+      graphPathNegative.lineTo(getX(-x, x0), getY(y2, y0));
     }
-    canvas.drawPath(graphPath, _graphPaint);
-    canvas.drawPath(graphPath2, _graphPaint);
+    canvas.drawPath(graphPathPositive, _graphPaint);
+    canvas.drawPath(graphPathNegative, _graphPaint);
   }
 
   double getY(double y, double y0) {

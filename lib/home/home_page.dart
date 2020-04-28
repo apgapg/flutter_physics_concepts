@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_concepts/error/error_page.dart';
-import 'package:flutter_concepts/graph/graph_plotter_page.dart';
 import 'package:flutter_concepts/home/module_card.dart';
-import 'package:flutter_concepts/optics/optics_page.dart';
-import 'package:flutter_concepts/wave/wave_page.dart';
+import 'package:flutter_concepts/routes/routes.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -61,38 +58,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   void onWaveTap() {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (context, a1, a2) => WavePage(),
-      ),
-    );
+    Navigator.pushNamed(context, Routes.waveMotion);
   }
 
   void onOpticsTap() {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (context, a1, a2) => OpticsPage(),
-      ),
-    );
+    Navigator.pushNamed(context, Routes.rayOptics);
   }
 
   void onErrorTap() {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (context, a1, a2) => ErrorPage(),
-      ),
-    );
+    Navigator.pushNamed(context, Routes.errorAnalysis);
   }
 
   void onPlotterTap() {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (context, a1, a2) => GraphPlotterPage(),
-      ),
-    );
+    Navigator.pushNamed(context, Routes.graphPlotter);
   }
 }

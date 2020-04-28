@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class Graph {
+class Graph extends Equatable {
   final String id;
   final Color color;
   final String function;
@@ -25,4 +26,7 @@ class Graph {
       isVisible: isVisible ?? this.isVisible,
     );
   }
+
+  @override
+  List<Object> get props => [id];
 }

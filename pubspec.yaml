@@ -26,6 +26,10 @@ dependencies:
   json_table: ^1.2.0
   effective_dart: ^1.1.0
   math_expressions: ^2.0.0
+  line_awesome_icons: ^1.0.4+2
+  flutter_colorpicker: ^0.3.4
+  uuid: ^2.0.4
+  equatable: ^1.1.1
 
 dev_dependencies:
   flutter_test:

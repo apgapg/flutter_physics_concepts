@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_concepts/graph/axes_painter.dart';
 import 'package:flutter_concepts/graph/graph_painter.dart';
 import 'package:flutter_concepts/graph/widgets/graph_data_tile.dart';
+import 'package:uuid/uuid.dart';
 
 import 'models/graph.dart';
 
@@ -19,7 +20,7 @@ class _GraphPlotterPageState extends State<GraphPlotterPage> {
     super.initState();
     graphs.add(
       Graph(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        id: Uuid().v1(),
         color: Colors.red,
         function: 'x^3',
         isVisible: true,
@@ -56,8 +57,33 @@ class _GraphPlotterPageState extends State<GraphPlotterPage> {
                 child: Column(
                   children: <Widget>[
                     ...graphs.map(
-                      (e) => GraphDataTile(e, onChange: onChange),
+                      (e) => Container(
+                        margin: EdgeInsets.symmetric(vertical: 6),
+                        child: GraphDataTile(
+                          e,
+                          onChange: onChange,
+                          key: ValueKey<String>(e.id),
+                        ),
+                      ),
                     ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    RaisedButton(
+                      child: Text('+ ADD MORE'),
+                      onPressed: () {
+                        setState(() {
+                          graphs.add(
+                            Graph(
+                              id: Uuid().v1(),
+                              color: Colors.blue,
+                              function: 'x^3',
+                              isVisible: true,
+                            ),
+                          );
+                        });
+                      },
+                    )
                   ],
                 ),
               ),
@@ -95,13 +121,12 @@ class _GraphPlotterPageState extends State<GraphPlotterPage> {
     );
   }
 
-  void onChange(
-    String text,
-    Graph graph,
-  ) {
-    graphs.removeWhere((element) => element.id == graph.id);
+  void onChange(Graph graph) {
+    final index = graphs.indexOf(graph);
+
+    graphs.remove(graph);
     setState(() {
-      graphs.add(graph);
+      graphs.insert(index, graph);
     });
   }
 }

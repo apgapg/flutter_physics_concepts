@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_concepts/graph/models/graph.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class GraphDataTile extends StatefulWidget {
   final Graph graph;
-  final void Function(String text, Graph graph) onChange;
+  final void Function(Graph graph) onChange;
 
   GraphDataTile(
     this.graph, {
     this.onChange,
-  });
+    Key key,
+  }) : super(key: key);
 
   @override
   _GraphDataTileState createState() => _GraphDataTileState();
@@ -17,17 +20,19 @@ class GraphDataTile extends StatefulWidget {
 class _GraphDataTileState extends State<GraphDataTile> {
   TextEditingController _controller = TextEditingController();
 
+  Graph graph;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    graph = widget.graph;
 
     _controller = TextEditingController.fromValue(
       TextEditingValue(text: widget.graph.function),
     );
     _controller.addListener(() {
+      graph = graph.copyWith(function: _controller.text);
       widget.onChange(
-        _controller.text,
         widget.graph.copyWith(function: _controller.text),
       );
     });
@@ -38,8 +43,32 @@ class _GraphDataTileState extends State<GraphDataTile> {
     return Container(
       child: ListTile(
         leading: GestureDetector(
-          child: Icon(Icons.graphic_eq),
-          onTap: () {},
+          child: Icon(
+            Icons.graphic_eq,
+            color: graph.color,
+          ),
+          onTap: () {
+            showDialog(
+              context: context,
+              child: AlertDialog(
+                title: const Text('Pick color'),
+                content: SingleChildScrollView(
+                  child: BlockPicker(
+                    pickerColor: graph.color,
+                    onColorChanged: changeColor,
+                  ),
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: const Text('Cancel'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
         ),
         title: Row(
           children: <Widget>[
@@ -51,7 +80,7 @@ class _GraphDataTileState extends State<GraphDataTile> {
               child: TextField(
                 controller: _controller,
                 decoration: InputDecoration(
-                  hintText: widget.graph.function,
+                  hintText: graph.function,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.grey[300],
@@ -69,10 +98,24 @@ class _GraphDataTileState extends State<GraphDataTile> {
           ],
         ),
         trailing: GestureDetector(
-          child: Icon(Icons.remove_red_eye),
-          onTap: () {},
+          child: Icon(
+            graph.isVisible ? LineAwesomeIcons.eye : LineAwesomeIcons.eye_slash,
+            color: graph.color,
+          ),
+          onTap: () {
+            setState(() {
+              graph = graph.copyWith(isVisible: !graph.isVisible);
+            });
+            widget.onChange(graph);
+          },
         ),
       ),
     );
+  }
+
+  void changeColor(Color color) {
+    graph = graph.copyWith(color: color);
+    widget.onChange(graph);
+    Navigator.pop(context);
   }
 }
